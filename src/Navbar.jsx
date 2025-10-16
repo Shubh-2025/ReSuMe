@@ -9,10 +9,10 @@ const Navbar = () => {
         <nav className="flex h-25 items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">
             {/* Logo */}
             <div
-                className="text-3xl text-black font-bold cursor-pointer hover:text-indigo-600 transition-all ease-in-out duration-400"
+                className="text-3xl text-black font-bold cursor-pointer"
                 title="Home"
             >
-                ReSuMe
+                <h2 className="text-2xl font-bold text-black">ReSuMe<span className="text-indigo-500">Craft</span></h2>
             </div>
 
             {/* Desktop Menu */}

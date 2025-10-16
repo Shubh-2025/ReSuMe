@@ -1,13 +1,14 @@
 import { FaUser } from "react-icons/fa";
 import Button from "./DownloadButton";
 import {Link} from 'react-router-dom'
+import { motion } from "framer-motion";
 
 const Template1 = ({ resumeData }) => {
-    return (<div className="h-screen bg-gray-100 flex flex-col justify-center items-center gap-10 py-10 px-4">
+    return (<div className="h-screen bg-gray-100 flex flex-col justify-center items-center gap-10 p-5">
         {/* Header Section */}
         <div className="w-full m-1 flex flex-wrap gap-4"> 
-            <div className="text-3xl text-black font-bold flex-1">
-                <Link to={`/`}>ReSuMe</Link>
+            <div className="text-3xl text-black font-bold  flex-1">
+                <Link to={`/`}>ReSuMe<span className="text-indigo-500">Craft</span></Link>
                 <br />
                 <span className="text-xl font-light">Thanks For Choosing Us...</span>
             </div>
@@ -16,14 +17,21 @@ const Template1 = ({ resumeData }) => {
                 <Button className="" name={"Download"} />
             </div>
         </div>
+        {/* line */}
+            <motion.div
+                initial={{ width: 0 }}
+                animate={{ width: "100%" }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="h-[5px] w-full bg-black "
+            />
 
         {/* Resume Body */}
         <div
             id="resume"
-            className="bg-white w-full max-w-5xl shadow-lg rounded-lg lg:overflow-hidden flex flex-col md:flex-row flex-1 relative overflow-scroll"
+            className="bg-white w-full h-full max-w-5xl shadow-lg rounded-lg lg:overflow-hidden flex flex-col md:flex-row flex-1 relative overflow-scroll"
         >
             {/* Left Sidebar */}
-            <div className="bg-gray-900 text-white h-full w-full md:w-1/3 p-6 flex flex-col items-center">
+            <div className="bg-gray-900 text-white w-full md:w-1/3 p-6 flex flex-col items-center">
                 {/* Profile Picture Placeholder */}
                 <div className="w-32 h-32 rounded-full mb-4 flex items-center justify-center">
                     <FaUser size={70} />
@@ -43,7 +51,7 @@ const Template1 = ({ resumeData }) => {
                 </div>
 
                 {/* Skills */}
-                <div className="w-full mt-6">
+                <div className="w-full h-full mt-6">
                     <h2 className="text-lg font-semibold border-b border-gray-700 pb-1 mb-3">
                         Skills
                     </h2>
