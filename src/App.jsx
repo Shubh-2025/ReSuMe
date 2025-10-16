@@ -1,14 +1,15 @@
 import { useState } from 'react'
-import './App.css'
+import { Outlet } from 'react-router-dom';
 
 function App() {
   const [count, setCount] = useState(0)
-
+  // const flag = true
+  const flag = false
   return (
-    <>
-      <div>App</div>
-    </>
+    <div className='w-screen h-screen bg-amber-100 flex flex-col justify-between' >
+       <Outlet/>
+    </div>
   )
 }
 
-export default App
+export default App;
