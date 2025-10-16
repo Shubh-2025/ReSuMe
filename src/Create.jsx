@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { Plus } from "lucide-react";
 import { Link } from "react-router-dom";
+import CurvedLoop from "./Curvedloop";
 
 const templates = [
     { id: 1, name: "Template 1" },
@@ -10,7 +10,16 @@ const templates = [
 
 const Create = () => {
     return (
-        <div className="h-full w-full bg-white flex flex-col items-start justify-start px-6 md:px-16 lg:px-32 py-10 overflow-hidden">
+
+        <div className="h-full w-full bg-gray-100 flex flex-col items-start justify-start px-6 md:px-16 lg:px-32 py-10 overflow-auto">
+            <CurvedLoop
+                marqueeText="Be ✦ Creative ✦ ⌀ ✦ With ✦ ReSuMeCraft ✦ ⌀ ✦"
+                speed={2}
+                curveAmount={200}
+                direction="left"
+                interactive={false}
+                className="custom-text-style"
+            />
             {/* Header */}
             <motion.h1
                 initial={{ opacity: 0, y: -10 }}
@@ -26,40 +35,41 @@ const Create = () => {
                 initial={{ width: 0 }}
                 animate={{ width: "100%" }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
-                className="h-[2px] bg-black mb-8"
+                className="h-[5px] w-full bg-black mb-8"
             />
 
             {/* Grid Section */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full">
-                {/* Create Blank Card */}
-                <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    // transition={{ duration: 0.6 }}
-                    transition={{ type: "spring", stiffness: 200, damping: 10, duration: 0.6 }}
-                    className="border border-gray-500 rounded-xl flex flex-col items-center justify-center p-6 text-black cursor-pointer bg-transparent hover:bg-black hover:text-white transition-all"
-                >
-                    <div className="border border-gray-400 rounded-lg p-4 mb-3 flex items-center justify-center bg-white text-black transition">
-                        <Plus size={28} />
-                    </div>
-                    <p className=" text-sm font-medium">Create Blank</p>
-                </motion.div>
-
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full">
                 {/* Template Cards */}
                 {templates.map((t) => (
-                    <Link to={`/preview/#${t.id}`} key={t.id} className="border border-gray-500 rounded-xl flex flex-col items-center justify-center p-6 cursor-pointer hover:bg-gradient-to-r from-indigo-500/60 via-pink-500/60 to-yellow-400/60 transition-all">
+                    <Link
+                        to={`/preview/#${t.id}`}
+                        key={t.id}
+                        className="rounded flex items-center justify-center cursor-pointer"
+                    >
                         <motion.div
+                            style={{
+                                backgroundImage: `url('https://marketplace.canva.com/EAFJKvgdliU/1/0/1131w/canva-black-blue-modern-professional-cv-resume-template-m6HQc2Lp6d8.jpg')`,
+                                backgroundSize: "contain",
+                                backgroundPosition: "center",
+                                backgroundRepeat: "no-repeat"
+                            }}
                             whileHover={{ scale: 1.05 }}
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            // transition={{ duration: 0.6 }}
-                            transition={{ type: "spring", stiffness: 200, damping: 10, duration: 0.6 }}
-                        >
-                            <p className="text-black text-sm font-medium">{t.name}</p>
-                        </motion.div></Link>
+                            transition={{ duration: 0.6 }}
+                            className="w-full aspect-square rounded-xl"
+                        ></motion.div>
+                    </Link>
                 ))}
             </div>
+            {/* line */}
+            <motion.div
+                initial={{ width: 0 }}
+                animate={{ width: "100%" }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="h-[5px] w-full bg-black mt-8"
+            />  
         </div>
     );
 };

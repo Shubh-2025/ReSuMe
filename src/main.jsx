@@ -6,21 +6,23 @@ import './index.css';
 import App from './App.jsx';
 import Navbar from './Navbar';
 import Create from './Create';
+import Footer from './Footer.jsx';
 import Preview from './Preview';
 import Auth from './Auth.jsx';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/canvas",
     element: <App />,
     children: [
       {
         path: "", 
         element: (
-          <>
+          <div className="flex flex-col">
             <Navbar />
             <Create />
-          </>
+            <Footer />
+          </div>
         ),
       },
     ],
