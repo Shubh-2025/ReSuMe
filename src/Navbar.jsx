@@ -10,7 +10,7 @@ const Navbar = () => {
             {/* Logo */}
             <div
                 className="text-3xl text-black font-bold cursor-pointer"
-                title="Home"
+                title="Home" onClick={()=>{window.location='/'}}
             >
                 <h2 className="text-2xl font-bold text-black">ReSuMe<span className="text-indigo-500">Craft</span></h2>
             </div>
@@ -63,7 +63,7 @@ const Navbar = () => {
                 <a href="#" className="block flex-2 font-bold">Home</a>
                 <a href="#" className="block flex-2 font-bold">Previous</a>
                 <a href="#" className="block flex-2 font-bold">Profile</a>
-                <Button name={"Login"} />
+                <Link to={`/auth`}><Button name={"Login"} /></Link>
             </div>
         </nav>
     );
