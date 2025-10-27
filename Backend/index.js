@@ -19,7 +19,6 @@ app.use("/", router);
 
 async function main() { // entry point of the application
     try {
-        let { rows } = await pool.query("");
         app.listen(PORT, () => {
             console.log('Server is listening and serving on port ', PORT);
         });
