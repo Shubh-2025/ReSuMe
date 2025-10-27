@@ -43,41 +43,41 @@ const Auth = () => {
 
 const LoginForm = () => {
   return (
-    <form className="flex flex-col gap-4 inset-0">
+    <form className="flex flex-col gap-4 items-center inset-0">
       <input
         type="email"
         placeholder="Email"
-        className="p-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all"
+        className=" w-full p-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all"
       />
       <input
         type="password"
         placeholder="Password"
-        className="p-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all"
+        className=" w-full p-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all"
       />
-      <Button name={"Login"} />
+      <div><Button name={"Login"} /></div>
     </form>
   );
 };
 
 const RegisterForm = () => {
   return (
-    <form className="flex flex-col gap-4">
+    <form className="flex flex-col gap-4 items-center inset-0">
       <input
         type="text"
         placeholder="Full Name"
-        className="p-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all"
+        className="w-full p-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all"
       />
       <input
         type="email"
         placeholder="Email"
-        className="p-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all"
+        className="w-full p-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all"
       />
       <input
         type="password"
         placeholder="Password"
-        className="p-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all"
+        className="w-full p-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all"
       />
-      <Button name={"Register"} />
+      <div><Button name={"Register"} /></div>
     </form>
   );
 };
