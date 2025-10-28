@@ -16,7 +16,7 @@ export default function Landing() {
     const [{ x, y }, setPos] = useState({ x: 0, y: 0 });
     const dragState = useRef({ dragging: false, offsetX: 0, offsetY: 0 });
 
-    const words = ["Build", "Design", "Showcase", "Ship"];
+    const words = ["Build", "Design", "Showcase"];
     const [wordIndex, setWordIndex] = useState(0);
     const [sub, setSub] = useState("");
 
