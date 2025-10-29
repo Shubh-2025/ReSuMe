@@ -8,3 +8,18 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
+@media print {
+  body, html {
+    margin: 0;
+    padding: 0;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .print\:w-full {
+    width: 100% !important;
+  }
+}

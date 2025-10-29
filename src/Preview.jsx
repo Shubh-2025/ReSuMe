@@ -1,10 +1,16 @@
 import Template1 from "./Template1";
-import { Link } from "react-router-dom";
+import Template2 from "./Template2";
+import Template3 from "./Template3";
+import { Link, useLocation } from "react-router-dom";
 import Button from "./DownloadButton";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
 const Preview = () => {
-  const resumeData = {
+  // dummy user id
+const userid = 1; //from cookies
+// let resumeData={};
+let [resumeData,setResumeData] =useState({
     name: "Priya Sharma",
     title: "Frontend Developer",
     contact: {
@@ -37,7 +43,31 @@ const Preview = () => {
           "Graduated with Distinction. Focused on Web Development, Data Structures, and Database Management.",
       },
     ],
+  });
+  const location = useLocation();
+  const [templateId, setTemplateId] = useState(1);
+
+  useEffect(() => {
+    // Extract hash from URL (like "#2")
+    const hash = location.hash.replace("#", "");
+    if (hash) {
+      setTemplateId(parseInt(hash));
+    }
+  }, [location]);
+
+
+  // Select which template to render dynamically
+  const renderTemplate = () => {
+    switch (templateId) {
+      case 1:
+        return <Template1 resumeData={resumeData} />;
+      case 2:
+        return <Template2 resumeData={resumeData} />;
+      case 3:
+        return <Template3 resumeData={resumeData} />;
+    }
   };
+
 
   return (<div className="h-screen bg-gray-100 flex flex-col justify-center items-center gap-10 p-5">
     {/* Header Section */}
@@ -48,19 +78,18 @@ const Preview = () => {
         <span className="text-xl font-light">Thanks For Choosing Us...</span>
       </div>
       <div className="flex flex-1 justify-evenly gap-1">
-        <Button className="" name={"Format"} />
-        <Button className="" name={"Download"} />
+        <Link to={`/format/${templateId}/${userid}`}><Button name={"Format"} /></Link>
+        {/* <Button name={"Download"} /> */}
       </div>
     </div>
-    {/* line */}
+
     <motion.div
       initial={{ width: 0 }}
       animate={{ width: "100%" }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="h-[5px] w-full bg-black "
     />
-    {/* template */}
-    <Template1 resumeData={resumeData} />
+    {renderTemplate()}
   </div>
   );
 };

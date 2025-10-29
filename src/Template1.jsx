@@ -2,7 +2,7 @@ import { FaUser } from "react-icons/fa";
 
 const Template1 = ({ resumeData }) => {
     return (
-        <>
+        <div>
             {/* Resume Body */}
             <div
                 id="resume"
@@ -86,7 +86,8 @@ const Template1 = ({ resumeData }) => {
                         © ReSuMe.com
                     </div>
                 </div>
-            </div></>
+            </div>
+        </div>
     )
 }
 export default Template1;

@@ -1,11 +1,14 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import CurvedLoop from "./Curvedloop";
+import template1 from "./template1.png";
+import template2 from "./template2.png";
+import template3 from "./template3.png";
 
 const templates = [
-    { id: 1, name: "Template 1" },
-    { id: 2, name: "Template 2" },
-    { id: 3, name: "Template 3" },
+    { id: 1, name: "Template 1",img : template1 },
+    { id: 2, name: "Template 2",img : template2 },
+    { id: 3, name: "Template 3",img : template3 },
 ];
 
 const Create = () => {
@@ -49,7 +52,7 @@ const Create = () => {
                     >
                         <motion.div
                             style={{
-                                backgroundImage: `url('https://marketplace.canva.com/EAFJKvgdliU/1/0/1131w/canva-black-blue-modern-professional-cv-resume-template-m6HQc2Lp6d8.jpg')`,
+                                backgroundImage: `url(${t.img})`,
                                 backgroundSize: "contain",
                                 backgroundPosition: "center",
                                 backgroundRepeat: "no-repeat"

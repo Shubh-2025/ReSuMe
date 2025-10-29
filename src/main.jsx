@@ -10,6 +10,8 @@ import Create from './Create';
 import Footer from './Footer.jsx';
 import Preview from './Preview';
 import Auth from './Auth.jsx';
+import ResumeForm from './ResumeForm.jsx';
+import Generated from './generated.jsx';
 
 const router = createBrowserRouter([
   {
@@ -17,7 +19,7 @@ const router = createBrowserRouter([
     element: <Landing />,
   },
   {
-    path: "/canvas",
+    path: "canvas",
     element: <App />,
     children: [
       {
@@ -39,6 +41,14 @@ const router = createBrowserRouter([
   {
     path:"auth",
     element:<Auth/>
+  },
+  {
+    path:"format/:tid/:uid",
+    element:<ResumeForm/>
+  },
+  {
+    path:"/generated",
+    element:<Generated/>
   }
 ]);
 
