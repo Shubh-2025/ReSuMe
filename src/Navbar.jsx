@@ -16,10 +16,7 @@ const Navbar = () => {
             </div>
 
             {/* Desktop Menu */}
-            <div className="hidden sm:flex items-center gap-8">
-                <a href="#" className="block hover:text-indigo-500 font-bold transition-all ease-in-out duration-400">Home</a>
-                <a href="#" className="block hover:text-indigo-500 font-bold transition-all ease-in-out duration-400">Previous</a>
-                <a href="#" className="block hover:text-indigo-500 font-bold transition-all ease-in-out duration-400">Profile</a>
+            <div className="hidden sm:flex items-center justify-center gap-8">
                 <Link to={`/auth`}><Button name={"Login"} /></Link>
             </div>
 
@@ -53,16 +50,13 @@ const Navbar = () => {
             {/* Mobile Menu */}
             <div
                 className={`
-          absolute left-0 top-0 w-full h-60 bg-white shadow-md p-5 flex flex-col justify-between items-center text-sm md:hidden overflow-hidden z-50
+          absolute left-0 top-0 w-full h-60 bg-white shadow-md p-5 flex flex-col justify-center items-center text-sm md:hidden overflow-hidden z-50
           transition-all duration-500 ease-out
           ${open
                         ? "opacity-100 translate-y-0"
                         : "opacity-0 -translate-y-5 py-0 pointer-events-none"}
         `}
             >
-                <a href="#" className="block flex-2 font-bold">Home</a>
-                <a href="#" className="block flex-2 font-bold">Previous</a>
-                <a href="#" className="block flex-2 font-bold">Profile</a>
                 <Link to={`/auth`}><Button name={"Login"} /></Link>
             </div>
         </nav>
