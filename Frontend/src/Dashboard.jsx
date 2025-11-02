@@ -1,4 +1,4 @@
-import React, { useEffect ,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -11,8 +11,8 @@ import {
 } from "lucide-react";
 
 export default function Dashboard({ onCreate, onOpen }) {
-  const [name,setName] =useState("User");
-  const [cvs,setCvs] = useState([]);
+  const [name, setName] = useState("User");
+  const [cvs, setCvs] = useState([]);
   const navigate = useNavigate();
   const hours = new Date().getHours();
   const greetingWord =
@@ -54,31 +54,36 @@ export default function Dashboard({ onCreate, onOpen }) {
       year: "numeric",
     });
   };
-  useEffect(()=>{
+  useEffect(() => {
     (async () => {
-        try {
-            const res = await fetch(`https://localhost:9000/dashboard/${localStorage.getItem("userId")}`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                }
-            });
+      try {
+        const res = await fetch(
+          `https://localhost:9000/dashboard/${localStorage.getItem("userId")}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
-            if (!res.ok) {
-                console.error("Failed to fetch user data", res.status);
-                return;
-            }
-
-            const data = await res.json();
-
-            // update local variables (note: these are not stateful in the current component)
-            if (data.name) name = setName(data.name);
-            if (Array.isArray(data.cvs)) cvs = setCvs(data.cvs);
-        } catch (err) {
-            console.error("Error loading user data:", err.message);
+        if (!res.ok) {
+          console.error("Failed to fetch user data", res.status);
+          return;
         }
+
+        const data = await res.json();
+
+        // update local variables (note: these are not stateful in the current component)
+        if (data.name) {
+          setName(data.name);
+        }
+        if (Array.isArray(data.cvs)) setCvs(data.cvs);
+      } catch (err) {
+        console.error("Error loading user data:", err.message);
+      }
     })();
-  },[]);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-8">
