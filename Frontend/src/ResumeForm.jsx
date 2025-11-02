@@ -172,7 +172,7 @@ export default function ResumeForm() {
             }
 
             const result = await response.json();
-            navigate('/generated');
+            navigate(`/generated/${result.id}`);
         } catch (err) {
             console.error("Error submitting form:", err);
             alert("Failed to submit form. Please try again later.");

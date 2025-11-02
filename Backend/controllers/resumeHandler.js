@@ -2,9 +2,9 @@ import errorHandler from "../error.js";
 import pool from "../db.js";
 
 const resumeHandler = async (req, res) => {
-    let { uid } = req.params;
+    let { uid, id } = req.params;
     try {
-        const response = await pool.query("SELECT * FROM resumes where uid=$1 limit 100", [uid]);
+        const response = await pool.query("SELECT * FROM resumes where uid=$1 and id=$2 limit 100", [uid, id]);
         if (response.rows.length === 0) {
             return res.status(404).json({ message: "Resume not found" });
         }

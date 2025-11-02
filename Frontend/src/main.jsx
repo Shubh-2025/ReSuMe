@@ -48,7 +48,7 @@ const router = createBrowserRouter([
     element:<ResumeForm/>
   },
   {
-    path:"/generated",
+    path:"/generated/:id",
     element:<Generated/>
   },{
     path:"/dashboard",

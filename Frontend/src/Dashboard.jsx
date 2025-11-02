@@ -35,7 +35,7 @@ export default function Dashboard({ onCreate, onOpen }) {
     if (onOpen) {
       onOpen(cv);
     } else {
-      navigate("/generated");
+      navigate(`/generated/${cv.id}`);
     }
   };
 
@@ -58,32 +58,44 @@ export default function Dashboard({ onCreate, onOpen }) {
     (async () => {
       try {
         const res = await fetch(
-          `https://localhost:9000/dashboard/${localStorage.getItem("userId")}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
+          `http://localhost:9000/dashboard/${localStorage.getItem("userId")}`
         );
-
         if (!res.ok) {
           console.error("Failed to fetch user data", res.status);
           return;
         }
 
         const data = await res.json();
+        setName(data.name.toUpperCase().charAt(0) + data.name.slice(1));
 
-        // update local variables (note: these are not stateful in the current component)
-        if (data.name) {
-          setName(data.name);
-        }
         if (Array.isArray(data.cvs)) setCvs(data.cvs);
       } catch (err) {
         console.error("Error loading user data:", err.message);
       }
     })();
+    (async () => {
+      try {
+        const res = await fetch(
+          `http://localhost:9000/userresumes/${localStorage.getItem("userId")}`
+        );
+        if (!res.ok) {
+          console.error("Failed to fetch canvas data", res.status);
+          return;
+        }
+        const data = await res.json();
+        setCvs(data.message);
+      } catch (err) {
+        console.error("Error loading canvas data:", err.message);
+      }
+    })();
   }, []);
+
+  function logoutHandler() {
+    let sure = window.confirm("Are you sure you want to log out?");
+    if (!sure) return;
+    localStorage.removeItem("userId");
+    navigate("/");
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-8">
@@ -101,7 +113,9 @@ export default function Dashboard({ onCreate, onOpen }) {
           </Link>
 
           <div className="flex items-center space-x-4">
-            <span className="text-slate-600">Welcome back</span>
+            <button onClick={logoutHandler} className="text-slate-600">
+              Log Out
+            </button>
             <div className="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center">
               <User className="w-4 h-4 text-indigo-600" />
             </div>
@@ -177,7 +191,7 @@ export default function Dashboard({ onCreate, onOpen }) {
                         </div>
 
                         <h3 className="font-semibold text-slate-900 mb-2 line-clamp-2">
-                          {cv.title || "Untitled Resume"}
+                          {cv.name || "Untitled Resume"}
                         </h3>
 
                         <div className="space-y-2 text-sm text-slate-600">

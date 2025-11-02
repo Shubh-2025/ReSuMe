@@ -3,7 +3,7 @@ import errorHandler from '../error.js';
 
 const editHandler = async (req, res) => {
     try {
-        const {
+        let {
             name,
             title,
             contact,

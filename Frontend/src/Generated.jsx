@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef, useCallback } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect, useRef, useCallback, use } from "react";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
@@ -410,6 +410,7 @@ const Generated = () => {
   const [showForm, setShowForm] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const { id } = useParams();
 
   const [resumeData, setResumeData] = useState({
     name: "Priya Sharma",
@@ -583,7 +584,9 @@ const Generated = () => {
     const fetchTemplate = async () => {
       try {
         const response = await fetch(
-          `http://localhost:9000/generate/${localStorage.getItem("userId")}`
+          `http://localhost:9000/generate/${localStorage.getItem(
+            "userId"
+          )}/${id}`
         );
         if (!response.ok) {
           console.error("Data not found");

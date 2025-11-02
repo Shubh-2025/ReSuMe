@@ -21,16 +21,17 @@ const generateHandler = async (req, res) => {
         education = education.map((edu) => JSON.stringify(edu));
         console.log(education);
 
-        const response = await pool.query(
+        const { rows } = await pool.query(
             "INSERT INTO resumes (uid,tid,name, title,phone, email,address, skills, profile, experience, education) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9 ,$10, $11) RETURNING id", [uid, tid, name, title, contact.phone, contact.email, contact.address, skills, profile, experience, education]);
 
-        if (!response.rows[0]?.id) {
+        if (!rows[0]?.id) {
             return res.status(401).json({
                 message: "Failed to save resume data."
             });
         }
         return res.status(201).json({
             message: "Resume data received successfully!",
+            id: rows[0].id
         });
     } catch (err) {
         console.error(err.message);
