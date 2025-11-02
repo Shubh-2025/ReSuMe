@@ -544,13 +544,14 @@ const Generated = () => {
       setResumeData({ ...formData });
 
       // Save to backend
-      const response = await fetch("http://localhost:9000/update-resume", {
+      const response = await fetch("http://localhost:9000/edit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           templateId,
+          uid: localStorage.getItem("userId"),
           ...formData,
         }),
       });
