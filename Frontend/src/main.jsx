@@ -12,6 +12,7 @@ import Preview from './Preview';
 import Auth from './Auth.jsx';
 import ResumeForm from './ResumeForm.jsx';
 import Generated from './generated.jsx';
+import Dashboard from './Dashboard.jsx';
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,9 @@ const router = createBrowserRouter([
   {
     path:"/generated",
     element:<Generated/>
+  },{
+    path:"/dashboard",
+    element:<Dashboard/>
   }
 ]);
 
