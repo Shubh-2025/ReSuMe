@@ -50,7 +50,7 @@ const LoginForm = () => {
   const { register, handleSubmit, reset } = useForm();
   let navigate = useNavigate();
   async function handleLogin(data) {
-    console.log(data);
+    // console.log(data);
     try {
       let response = await fetch("http://localhost:9000/login", {
         method: "POST",
@@ -58,8 +58,11 @@ const LoginForm = () => {
         body: JSON.stringify(data),
       });
       let result = await response.json();
+      if(!response.ok){
+        return alert(result.message);
+      }
       localStorage.setItem("userId", result.id);
-      console.log(result);
+      // console.log(result);
       reset();
       navigate("/canvas");
     } catch (error) {
@@ -99,7 +102,7 @@ const RegisterForm = () => {
   const { register, handleSubmit, reset } = useForm();
   let navigate = useNavigate();
   async function handleRegister(data) {
-    console.log(data);
+    // console.log(data);
     try {
       let response = await fetch("http://localhost:9000/regsiter", {
         method: "POST",
@@ -108,7 +111,10 @@ const RegisterForm = () => {
       });
       let result = await response.json();
       localStorage.setItem("userId", result.id);
-      console.log(result);
+      // console.log(result);
+      if(!response.ok){
+        return alert(result.message);
+      }
       reset();
       navigate("/canvas");
     } catch (error) {
