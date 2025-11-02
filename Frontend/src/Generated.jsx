@@ -6,19 +6,28 @@ import jsPDF from "jspdf";
 import Template1 from "./Template1";
 import Template2 from "./Template2";
 import Template3 from "./Template3";
-import { Download, Edit3, Save, ArrowLeft, FileText, X, Plus, Trash2 } from "lucide-react";
+import {
+  Download,
+  Edit3,
+  Save,
+  ArrowLeft,
+  FileText,
+  X,
+  Plus,
+  Trash2,
+} from "lucide-react";
 
 // Move EditForm outside the main component to prevent re-renders
-const EditForm = ({ 
-  formData, 
-  onFormChange, 
-  onContactChange, 
-  onArrayChange, 
-  onAddItem, 
-  onRemoveItem, 
-  onSave, 
-  onCancel, 
-  isSaving 
+const EditForm = ({
+  formData,
+  onFormChange,
+  onContactChange,
+  onArrayChange,
+  onAddItem,
+  onRemoveItem,
+  onSave,
+  onCancel,
+  isSaving,
 }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
@@ -29,7 +38,9 @@ const EditForm = ({
       >
         {/* Header */}
         <div className="flex justify-between items-center p-4 sm:p-6 border-b border-slate-200 flex-shrink-0">
-          <h2 className="text-xl sm:text-2xl font-bold text-slate-900">Edit Resume</h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
+            Edit Resume
+          </h2>
           <button
             onClick={onCancel}
             className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
@@ -42,13 +53,12 @@ const EditForm = ({
         <div className="flex-1 overflow-hidden">
           <div className="h-full overflow-y-auto p-4 sm:p-6">
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6">
-              
               {/* Basic Information */}
               <div className="space-y-3 sm:space-y-4">
                 <h3 className="text-lg font-semibold text-slate-900 border-b pb-2">
                   Basic Information
                 </h3>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">
                     Full Name
@@ -56,7 +66,7 @@ const EditForm = ({
                   <input
                     type="text"
                     value={formData.name}
-                    onChange={(e) => onFormChange('name', e.target.value)}
+                    onChange={(e) => onFormChange("name", e.target.value)}
                     className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base"
                   />
                 </div>
@@ -68,7 +78,7 @@ const EditForm = ({
                   <input
                     type="text"
                     value={formData.title}
-                    onChange={(e) => onFormChange('title', e.target.value)}
+                    onChange={(e) => onFormChange("title", e.target.value)}
                     className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base"
                   />
                 </div>
@@ -79,7 +89,7 @@ const EditForm = ({
                   </label>
                   <textarea
                     value={formData.profile}
-                    onChange={(e) => onFormChange('profile', e.target.value)}
+                    onChange={(e) => onFormChange("profile", e.target.value)}
                     rows={3}
                     className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base resize-vertical"
                   />
@@ -99,7 +109,7 @@ const EditForm = ({
                   <input
                     type="email"
                     value={formData.contact.email}
-                    onChange={(e) => onContactChange('email', e.target.value)}
+                    onChange={(e) => onContactChange("email", e.target.value)}
                     className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base"
                   />
                 </div>
@@ -111,7 +121,7 @@ const EditForm = ({
                   <input
                     type="tel"
                     value={formData.contact.phone}
-                    onChange={(e) => onContactChange('phone', e.target.value)}
+                    onChange={(e) => onContactChange("phone", e.target.value)}
                     className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base"
                   />
                 </div>
@@ -123,7 +133,7 @@ const EditForm = ({
                   <input
                     type="text"
                     value={formData.contact.address}
-                    onChange={(e) => onContactChange('address', e.target.value)}
+                    onChange={(e) => onContactChange("address", e.target.value)}
                     className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base"
                   />
                 </div>
@@ -137,7 +147,7 @@ const EditForm = ({
                   </h3>
                   <button
                     type="button"
-                    onClick={() => onAddItem('skills', 'New Skill')}
+                    onClick={() => onAddItem("skills", "New Skill")}
                     className="flex items-center space-x-1 text-indigo-600 hover:text-indigo-700 text-sm sm:text-base"
                   >
                     <Plus className="w-4 h-4" />
@@ -151,13 +161,15 @@ const EditForm = ({
                       <input
                         type="text"
                         value={skill}
-                        onChange={(e) => onArrayChange('skills', index, e.target.value)}
+                        onChange={(e) =>
+                          onArrayChange("skills", index, e.target.value)
+                        }
                         className="flex-1 px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base"
                         placeholder="Enter a skill"
                       />
                       <button
                         type="button"
-                        onClick={() => onRemoveItem('skills', index)}
+                        onClick={() => onRemoveItem("skills", index)}
                         className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors flex-shrink-0"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -175,11 +187,13 @@ const EditForm = ({
                   </h3>
                   <button
                     type="button"
-                    onClick={() => onAddItem('experience', {
-                      role: '',
-                      period: '',
-                      details: ''
-                    })}
+                    onClick={() =>
+                      onAddItem("experience", {
+                        role: "",
+                        period: "",
+                        details: "",
+                      })
+                    }
                     className="flex items-center space-x-1 text-indigo-600 hover:text-indigo-700 text-sm sm:text-base"
                   >
                     <Plus className="w-4 h-4" />
@@ -189,20 +203,23 @@ const EditForm = ({
 
                 <div className="space-y-3 max-h-60 overflow-y-auto">
                   {formData.experience.map((exp, index) => (
-                    <div key={index} className="space-y-3 p-3 sm:p-4 border border-slate-200 rounded-lg">
+                    <div
+                      key={index}
+                      className="space-y-3 p-3 sm:p-4 border border-slate-200 rounded-lg"
+                    >
                       <div className="flex justify-between items-start">
                         <h4 className="font-medium text-slate-900 text-sm sm:text-base">
                           Experience #{index + 1}
                         </h4>
                         <button
                           type="button"
-                          onClick={() => onRemoveItem('experience', index)}
+                          onClick={() => onRemoveItem("experience", index)}
                           className="p-1 text-red-600 hover:bg-red-50 rounded transition-colors flex-shrink-0"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
-                      
+
                       <div>
                         <label className="block text-sm font-medium text-slate-700 mb-1">
                           Job Role & Company
@@ -210,10 +227,12 @@ const EditForm = ({
                         <input
                           type="text"
                           value={exp.role}
-                          onChange={(e) => onArrayChange('experience', index, {
-                            ...exp,
-                            role: e.target.value
-                          })}
+                          onChange={(e) =>
+                            onArrayChange("experience", index, {
+                              ...exp,
+                              role: e.target.value,
+                            })
+                          }
                           className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base"
                           placeholder="e.g., Frontend Developer – Company Name"
                         />
@@ -226,10 +245,12 @@ const EditForm = ({
                         <input
                           type="text"
                           value={exp.period}
-                          onChange={(e) => onArrayChange('experience', index, {
-                            ...exp,
-                            period: e.target.value
-                          })}
+                          onChange={(e) =>
+                            onArrayChange("experience", index, {
+                              ...exp,
+                              period: e.target.value,
+                            })
+                          }
                           className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base"
                           placeholder="e.g., 2023 – Present"
                         />
@@ -241,10 +262,12 @@ const EditForm = ({
                         </label>
                         <textarea
                           value={exp.details}
-                          onChange={(e) => onArrayChange('experience', index, {
-                            ...exp,
-                            details: e.target.value
-                          })}
+                          onChange={(e) =>
+                            onArrayChange("experience", index, {
+                              ...exp,
+                              details: e.target.value,
+                            })
+                          }
                           rows={2}
                           className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base resize-vertical"
                           placeholder="Describe your responsibilities and achievements..."
@@ -263,11 +286,13 @@ const EditForm = ({
                   </h3>
                   <button
                     type="button"
-                    onClick={() => onAddItem('education', {
-                      degree: '',
-                      institution: '',
-                      details: ''
-                    })}
+                    onClick={() =>
+                      onAddItem("education", {
+                        degree: "",
+                        institution: "",
+                        details: "",
+                      })
+                    }
                     className="flex items-center space-x-1 text-indigo-600 hover:text-indigo-700 text-sm sm:text-base"
                   >
                     <Plus className="w-4 h-4" />
@@ -277,20 +302,23 @@ const EditForm = ({
 
                 <div className="space-y-3 max-h-60 overflow-y-auto">
                   {formData.education.map((edu, index) => (
-                    <div key={index} className="space-y-3 p-3 sm:p-4 border border-slate-200 rounded-lg">
+                    <div
+                      key={index}
+                      className="space-y-3 p-3 sm:p-4 border border-slate-200 rounded-lg"
+                    >
                       <div className="flex justify-between items-start">
                         <h4 className="font-medium text-slate-900 text-sm sm:text-base">
                           Education #{index + 1}
                         </h4>
                         <button
                           type="button"
-                          onClick={() => onRemoveItem('education', index)}
+                          onClick={() => onRemoveItem("education", index)}
                           className="p-1 text-red-600 hover:bg-red-50 rounded transition-colors flex-shrink-0"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
-                      
+
                       <div>
                         <label className="block text-sm font-medium text-slate-700 mb-1">
                           Degree
@@ -298,10 +326,12 @@ const EditForm = ({
                         <input
                           type="text"
                           value={edu.degree}
-                          onChange={(e) => onArrayChange('education', index, {
-                            ...edu,
-                            degree: e.target.value
-                          })}
+                          onChange={(e) =>
+                            onArrayChange("education", index, {
+                              ...edu,
+                              degree: e.target.value,
+                            })
+                          }
                           className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base"
                           placeholder="e.g., B.Tech in Information Technology"
                         />
@@ -314,10 +344,12 @@ const EditForm = ({
                         <input
                           type="text"
                           value={edu.institution}
-                          onChange={(e) => onArrayChange('education', index, {
-                            ...edu,
-                            institution: e.target.value
-                          })}
+                          onChange={(e) =>
+                            onArrayChange("education", index, {
+                              ...edu,
+                              institution: e.target.value,
+                            })
+                          }
                           className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base"
                           placeholder="e.g., University Name (Year – Year)"
                         />
@@ -329,10 +361,12 @@ const EditForm = ({
                         </label>
                         <textarea
                           value={edu.details}
-                          onChange={(e) => onArrayChange('education', index, {
-                            ...edu,
-                            details: e.target.value
-                          })}
+                          onChange={(e) =>
+                            onArrayChange("education", index, {
+                              ...edu,
+                              details: e.target.value,
+                            })
+                          }
                           rows={2}
                           className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base resize-vertical"
                           placeholder="Additional details like GPA, honors, relevant coursework..."
@@ -385,25 +419,36 @@ const Generated = () => {
       email: "priyasharma@email.com",
       address: "Bengaluru, India",
     },
-    skills: ["HTML5", "CSS3", "JavaScript", "React.js", "Tailwind CSS", "Git / GitHub"],
-    profile: "Creative and detail-oriented Frontend Developer with 2 years of experience in building responsive and interactive web applications.",
+    skills: [
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+      "React.js",
+      "Tailwind CSS",
+      "Git / GitHub",
+    ],
+    profile:
+      "Creative and detail-oriented Frontend Developer with 2 years of experience in building responsive and interactive web applications.",
     experience: [
       {
         role: "Frontend Developer – Tech Solutions Ltd.",
         period: "2023 – Present",
-        details: "- Built responsive web interfaces using React.js and Tailwind CSS.\n- Optimized website performance and enhanced user experience.",
+        details:
+          "- Built responsive web interfaces using React.js and Tailwind CSS.\n- Optimized website performance and enhanced user experience.",
       },
       {
         role: "Web Development Intern – SoftWorks Pvt. Ltd.",
         period: "2022 – 2023",
-        details: "- Assisted in developing interactive components using JavaScript and React.\n- Participated in code reviews and implemented feedback.",
+        details:
+          "- Assisted in developing interactive components using JavaScript and React.\n- Participated in code reviews and implemented feedback.",
       },
     ],
     education: [
       {
         degree: "B.Tech in Information Technology",
         institution: "Bangalore Institute of Technology (2019 – 2023)",
-        details: "Graduated with Distinction. Focused on Web Development, Data Structures, and Database Management.",
+        details:
+          "Graduated with Distinction. Focused on Web Development, Data Structures, and Database Management.",
       },
     ],
   });
@@ -428,22 +473,22 @@ const Generated = () => {
         useCORS: true,
         allowTaint: true,
         logging: false,
-        backgroundColor: '#ffffff',
+        backgroundColor: "#ffffff",
       });
 
-      const imgData = canvas.toDataURL('image/png');
+      const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF({
-        orientation: 'p',
-        unit: 'mm',
-        format: 'a4',
+        orientation: "p",
+        unit: "mm",
+        format: "a4",
       });
 
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
       pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-      pdf.save(`Resume_${resumeData.name.replace(/\s+/g, '_')}.pdf`);
-      
+      pdf.save(`Resume_${resumeData.name.replace(/\s+/g, "_")}.pdf`);
+
       setShowSuccess(true);
       setTimeout(() => setShowSuccess(false), 3000);
     } catch (error) {
@@ -455,42 +500,40 @@ const Generated = () => {
 
   // Use useCallback to prevent function re-creation on every render
   const handleFormChange = useCallback((field, value) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   }, []);
 
   const handleContactChange = useCallback((field, value) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       contact: {
         ...prev.contact,
-        [field]: value
-      }
+        [field]: value,
+      },
     }));
   }, []);
 
   const handleArrayChange = useCallback((field, index, value) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [field]: prev[field].map((item, i) => 
-        i === index ? value : item
-      )
+      [field]: prev[field].map((item, i) => (i === index ? value : item)),
     }));
   }, []);
 
   const handleAddItem = useCallback((field, template) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [field]: [...prev[field], template]
+      [field]: [...prev[field], template],
     }));
   }, []);
 
   const handleRemoveItem = useCallback((field, index) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [field]: prev[field].filter((_, i) => i !== index)
+      [field]: prev[field].filter((_, i) => i !== index),
     }));
   }, []);
 
@@ -508,7 +551,7 @@ const Generated = () => {
         },
         body: JSON.stringify({
           templateId,
-          ...formData
+          ...formData,
         }),
       });
 
@@ -538,7 +581,9 @@ const Generated = () => {
   useEffect(() => {
     const fetchTemplate = async () => {
       try {
-        const response = await fetch("http://localhost:9000/generate");
+        const response = await fetch(
+          `http://localhost:9000/generate/${localStorage.getItem("userId")}`
+        );
         if (!response.ok) {
           console.error("Data not found");
           return;
@@ -547,7 +592,7 @@ const Generated = () => {
         const result = await response.json();
         const data = result.message;
         setTemplateId(data.tid);
-        
+
         const formatted = {
           name: data.name,
           title: data.title,
@@ -558,8 +603,8 @@ const Generated = () => {
             address: data.address,
           },
           skills: data.skills || [],
-          experience: data.experience?.map(item => JSON.parse(item)) || [],
-          education: data.education?.map(item => JSON.parse(item)) || [],
+          experience: data.experience?.map((item) => JSON.parse(item)) || [],
+          education: data.education?.map((item) => JSON.parse(item)) || [],
         };
 
         setResumeData(formatted);
@@ -575,7 +620,7 @@ const Generated = () => {
   const renderTemplate = () => {
     // Use formData for real-time preview when form is open
     const previewData = showForm ? formData : resumeData;
-    
+
     switch (templateId) {
       case 1:
         return <Template1 ref={resumeRef} resumeData={previewData} />;
@@ -595,8 +640,8 @@ const Generated = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link 
-              to="/canvas" 
+            <Link
+              to="/canvas"
               className="flex items-center space-x-2 text-slate-900 hover:text-slate-700 transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />
@@ -668,14 +713,14 @@ const Generated = () => {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
         {/* Header Text */}
         <div className="text-center mb-4 sm:mb-8">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-2xl sm:text-3xl font-bold text-slate-900 mb-2"
           >
             Your Professional Resume
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -704,7 +749,10 @@ const Generated = () => {
           transition={{ delay: 0.4 }}
           className="text-center mt-4 sm:mt-6 text-slate-500 text-xs sm:text-sm"
         >
-          <p>Need to make changes? Use the Edit button above to modify your resume content.</p>
+          <p>
+            Need to make changes? Use the Edit button above to modify your
+            resume content.
+          </p>
         </motion.div>
       </main>
 

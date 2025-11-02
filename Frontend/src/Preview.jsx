@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { ArrowLeft, FileText, CheckCircle } from "lucide-react";
 
 const Preview = () => {
-  const userid = 1; // from cookies
+  const userid = localStorage.getItem("userId");
 
   const [resumeData, setResumeData] = useState({
     name: "Priya Sharma",
@@ -17,7 +17,14 @@ const Preview = () => {
       email: "priyasharma@email.com",
       address: "Bengaluru, India",
     },
-    skills: ["HTML5", "CSS3", "JavaScript", "React.js", "Tailwind CSS", "Git / GitHub"],
+    skills: [
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+      "React.js",
+      "Tailwind CSS",
+      "Git / GitHub",
+    ],
     profile:
       "Creative and detail-oriented Frontend Developer with 2 years of experience in building responsive and interactive web applications. Skilled in modern frontend frameworks and passionate about UI/UX design.",
     experience: [
@@ -95,18 +102,18 @@ const Preview = () => {
     {
       id: 1,
       name: "Modern Professional",
-      description: "Clean and contemporary design perfect for tech roles"
+      description: "Clean and contemporary design perfect for tech roles",
     },
     {
       id: 2,
       name: "Creative Portfolio",
-      description: "Ideal for designers and creative professionals"
+      description: "Ideal for designers and creative professionals",
     },
     {
       id: 3,
       name: "Executive Classic",
-      description: "Traditional layout for corporate and executive positions"
-    }
+      description: "Traditional layout for corporate and executive positions",
+    },
   ];
 
   return (
@@ -116,8 +123,8 @@ const Preview = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link 
-              to="/canvas" 
+            <Link
+              to="/canvas"
               className="flex items-center space-x-2 text-slate-900 hover:text-slate-700 transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />
@@ -128,11 +135,8 @@ const Preview = () => {
             </Link>
 
             {/* Action Button */}
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <Link 
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <Link
                 to={`/format/${selectedTemplate}/${userid}`}
                 className="flex items-center space-x-2 px-6 py-2 bg-black text-white rounded-lg hover:bg-black/50 transition-colors cursor-pointer shadow-sm"
               >
@@ -156,20 +160,21 @@ const Preview = () => {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header Text */}
         <div className="text-center mb-12">
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-3xl font-bold text-slate-900 mb-3"
           >
             Choose Your Template
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             className="text-slate-600 max-w-2xl mx-auto"
           >
-            Preview our professionally designed templates and select the one that best represents your personal brand
+            Preview our professionally designed templates and select the one
+            that best represents your personal brand
           </motion.p>
         </div>
 
@@ -180,7 +185,9 @@ const Preview = () => {
           transition={{ delay: 0.2 }}
           className="mb-12"
         >
-          <h2 className="text-lg font-semibold text-slate-900 mb-4">Available Templates</h2>
+          <h2 className="text-lg font-semibold text-slate-900 mb-4">
+            Available Templates
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {templates.map((template) => (
               <TemplateCard
@@ -207,10 +214,10 @@ const Preview = () => {
         >
           <div className="bg-slate-50 border-b border-slate-200 px-6 py-4">
             <h3 className="font-semibold text-slate-900">
-              Preview: {templates.find(t => t.id === selectedTemplate)?.name}
+              Preview: {templates.find((t) => t.id === selectedTemplate)?.name}
             </h3>
           </div>
-          
+
           <div className="w-full flex justify-center overflow-auto min-h-[calc(100vh-400px)] no-scrollbar p-6">
             {renderTemplate()}
           </div>
@@ -225,15 +232,14 @@ const Preview = () => {
         >
           <div className="bg-white rounded-lg border border-slate-200 p-6 inline-block">
             <p className="text-slate-700 mb-4">
-              Ready to customize the <span className="font-semibold text-indigo-600">
-                {templates.find(t => t.id === selectedTemplate)?.name}
-              </span> template?
+              Ready to customize the{" "}
+              <span className="font-semibold text-indigo-600">
+                {templates.find((t) => t.id === selectedTemplate)?.name}
+              </span>{" "}
+              template?
             </p>
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <Link 
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <Link
                 to={`/format/${selectedTemplate}/${userid}`}
                 className="inline-flex items-center space-x-2 px-8 py-3 bg-black text-white rounded-lg hover:bg-black/50 transition-colors shadow-sm font-medium"
               >
@@ -252,7 +258,9 @@ const Preview = () => {
         transition={{ delay: 0.6 }}
         className="text-center pb-8 text-slate-500 text-sm"
       >
-        <p>You can always change templates later during the customization process</p>
+        <p>
+          You can always change templates later during the customization process
+        </p>
       </motion.div>
     </div>
   );
