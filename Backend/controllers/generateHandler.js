@@ -17,9 +17,9 @@ const generateHandler = async (req, res) => {
         } = req.body;
         console.log(req.body);
         experience = experience.map((exp) => JSON.stringify(exp));
-        console.log(experience);
+        // console.log(experience);
         education = education.map((edu) => JSON.stringify(edu));
-        console.log(education);
+        // console.log(education);
 
         const { rows } = await pool.query(
             "INSERT INTO resumes (uid,tid,name, title,phone, email,address, skills, profile, experience, education) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9 ,$10, $11) RETURNING id", [uid, tid, name, title, contact.phone, contact.email, contact.address, skills, profile, experience, education]);

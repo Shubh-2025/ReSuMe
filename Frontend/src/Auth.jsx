@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Button from "./DownloadButton";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { Toaster, toast } from 'react-hot-toast';
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -19,6 +19,7 @@ const Auth = () => {
       </div>
 
       <div className="bg-white shadow-lg rounded-2xl w-full max-w-md p-6 md:p-10">
+        <Toaster />
         {/* Toggle */}
         <div className="flex justify-center mb-6">
           <button
@@ -58,13 +59,16 @@ const LoginForm = () => {
         body: JSON.stringify(data),
       });
       let result = await response.json();
+      // console.log(result)
       if(!response.ok){
-        return alert(result.message);
+        return toast.error(result.message);
       }
       localStorage.setItem("userId", result.id);
-      // console.log(result);
+      toast.success("Logged in Successfully",{ duration: 1000 })
       reset();
-      navigate("/canvas");
+      setTimeout(()=>
+      navigate("/canvas")
+      ,1500)
     } catch (error) {
       console.error("Error during login:", error.message);
     }
@@ -113,10 +117,13 @@ const RegisterForm = () => {
       localStorage.setItem("userId", result.id);
       // console.log(result);
       if(!response.ok){
-        return alert(result.message);
+        return toast.error(result.message);
       }
+      toast.success("Registered Successfully",{ duration: 1000 })
       reset();
-      navigate("/canvas");
+      setTimeout(()=>
+      navigate("/canvas")
+      ,1500)
     } catch (error) {
       console.error("Error during registration:", error.message);
     }

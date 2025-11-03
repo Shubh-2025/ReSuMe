@@ -3,7 +3,7 @@ import errorHandler from '../error.js';
 
 const homeHandler = async (req, res) => {
     try {
-        const response = pool.query("SELECT name, cuisine, recipe, imageurl FROM recipes LIMIT 20");
+        const response = await pool.query("select * from resumes limit 1");
     } catch (err) {
         console.error(err.message);
         errorHandler(res);

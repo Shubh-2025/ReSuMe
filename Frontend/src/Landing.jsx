@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import Button from "./DownloadButton";
 import { Link } from "react-router-dom";
+import { FileText } from "lucide-react";
 
 export default function Landing() {
     const templates = [
@@ -83,9 +84,14 @@ export default function Landing() {
                 }`}
         >
             <div className="w-full md:w-[420px] flex flex-col gap-5">
-                <h1 className="text-3xl font-bold tracking-tight">
-                    ReSuMe<span className="text-indigo-500">Craft</span>
-                </h1>
+                <div
+              className="flex items-center space-x-2 duration-700 transition-colors"
+            >
+              <FileText className={`w-6 h-6 ${dark?"text-indigo-500":"text-indigo-700"}`} />
+              <span className={`text-xl font-semibold duration-700 ${dark?"text-white":"text-black" }`}>
+                ReSuMe<span className={`${dark?"text-indigo-500":"text-indigo-700"}`}>Craft</span>
+              </span>
+            </div>
 
                 <p className={`transition-colors duration-700${dark ? "bg-black text-gray-100" : "bg-gray-100 text-black"
                     }`}>
@@ -141,7 +147,7 @@ export default function Landing() {
                         ›
                     </button>
                 </div>
-                <Link to={'/canvas'}><Button className="mt-5 w-fit" name={"Get Started"} /></Link>
+                <Link to={'/canvas'}><Button name={"Get Started"} /></Link>
                 <div className="flex gap-3 mt-5">
                     {[
                         { label: "Templates", value: "3" },
