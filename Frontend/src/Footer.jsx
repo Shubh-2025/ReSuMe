@@ -20,9 +20,9 @@ const Footer = () => {
           <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
           <ul className="space-y-2 text-sm">
             <li><a href="/" className="hover:text-indigo-400 transition">Home</a></li>
-            <li><a href="/templates" className="hover:text-indigo-400 transition">Templates</a></li>
-            <li><a href="/about" className="hover:text-indigo-400 transition">About Us</a></li>
-            <li><a href="/contact" className="hover:text-indigo-400 transition">Contact</a></li>
+            <li><a href="/preview/#1" className="hover:text-indigo-400 transition">Templates</a></li>
+            <li><a href="/dashboard" className="hover:text-indigo-400 transition">Dashboard</a></li>
+            {/* <li><a href="/contact" className="hover:text-indigo-400 transition">Contact</a></li> */}
           </ul>
         </div>
 
@@ -30,10 +30,10 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold text-white mb-4">Resources</h3>
           <ul className="space-y-2 text-sm">
-            <li><a href="/help" className="hover:text-indigo-400 transition">Help Center</a></li>
-            <li><a href="/faq" className="hover:text-indigo-400 transition">FAQ</a></li>
-            <li><a href="/privacy" className="hover:text-indigo-400 transition">Privacy Policy</a></li>
-            <li><a href="/terms" className="hover:text-indigo-400 transition">Terms of Service</a></li>
+            <li><a href="#" className="hover:text-indigo-400 transition">Help Center</a></li>
+            <li><a href="#" className="hover:text-indigo-400 transition">FAQ</a></li>
+            <li><a href="#" className="hover:text-indigo-400 transition">Privacy Policy</a></li>
+            <li><a href="#" className="hover:text-indigo-400 transition">Terms of Service</a></li>
           </ul>
         </div>
 

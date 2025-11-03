@@ -16,9 +16,9 @@ const editHandler = async (req, res) => {
         } = req.body;
         console.log(req.body);
         experience = experience.map((exp) => JSON.stringify(exp));
-        console.log(experience);
+        // console.log(experience);
         education = education.map((edu) => JSON.stringify(edu));
-        console.log(education);
+        // console.log(education);
         if (!uid) {
             return res.status(400).json({ message: "User ID is required." });
         }

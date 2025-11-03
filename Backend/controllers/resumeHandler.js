@@ -8,7 +8,7 @@ const resumeHandler = async (req, res) => {
         if (response.rows.length === 0) {
             return res.status(404).json({ message: "Resume not found" });
         }
-        console.log(response.rows[0]);
+        // console.log(response.rows[0]);
         res.status(200).json({ message: response.rows[0] });
     }
     catch (err) {

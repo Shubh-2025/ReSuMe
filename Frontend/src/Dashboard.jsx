@@ -4,10 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   FileText,
   Plus,
-  Calendar,
+  ArrowLeft,
   User,
   ArrowRight,
-  FolderOpen,
 } from "lucide-react";
 
 export default function Dashboard({ onCreate, onOpen }) {
@@ -19,8 +18,8 @@ export default function Dashboard({ onCreate, onOpen }) {
     hours < 12
       ? "Good morning"
       : hours < 18
-      ? "Good afternoon"
-      : "Good evening";
+        ? "Good afternoon"
+        : "Good evening";
   const displayName = String(name).trim() ? String(name).trim() : { name };
 
   const handleCreate = () => {
@@ -55,39 +54,46 @@ export default function Dashboard({ onCreate, onOpen }) {
     });
   };
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await fetch(
-          `http://localhost:9000/dashboard/${localStorage.getItem("userId")}`
-        );
-        if (!res.ok) {
-          console.error("Failed to fetch user data", res.status);
-          return;
-        }
+    if (!localStorage.getItem("userId")) {
+      navigate('/auth');
+      // console.log('one');
+      alert('Login first to access your dashboard');
+      //alerts twice as react uses strictMode In development.
+    } else {
+      (async () => {
+        try {
+          const res = await fetch(
+            `http://localhost:9000/dashboard/${localStorage.getItem("userId")}`
+          );
+          if (!res.ok) {
+            console.error("Failed to fetch user data", res.status);
+            return;
+          }
 
-        const data = await res.json();
-        setName(data.name.toUpperCase().charAt(0) + data.name.slice(1));
+          const data = await res.json();
+          setName(data.name.toUpperCase().charAt(0) + data.name.slice(1));
 
-        if (Array.isArray(data.cvs)) setCvs(data.cvs);
-      } catch (err) {
-        console.error("Error loading user data:", err.message);
-      }
-    })();
-    (async () => {
-      try {
-        const res = await fetch(
-          `http://localhost:9000/userresumes/${localStorage.getItem("userId")}`
-        );
-        if (!res.ok) {
-          console.error("Failed to fetch canvas data", res.status);
-          return;
+          if (Array.isArray(data.cvs)) setCvs(data.cvs);
+        } catch (err) {
+          console.error("Error loading user data:", err.message);
         }
-        const data = await res.json();
-        setCvs(data.message);
-      } catch (err) {
-        console.error("Error loading canvas data:", err.message);
-      }
-    })();
+      })();
+      (async () => {
+        try {
+          const res = await fetch(
+            `http://localhost:9000/userresumes/${localStorage.getItem("userId")}`
+          );
+          if (!res.ok) {
+            console.error("Failed to fetch canvas data", res.status);
+            return;
+          }
+          const data = await res.json();
+          setCvs(data.message);
+        } catch (err) {
+          console.error("Error loading canvas data:", err.message);
+        }
+      })();
+    }
   }, []);
 
   function logoutHandler() {
@@ -96,16 +102,16 @@ export default function Dashboard({ onCreate, onOpen }) {
     localStorage.removeItem("userId");
     navigate("/");
   }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-8">
       {/* Header */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 mb-8">
         <div className="flex items-center justify-between">
           <Link
-            to="/"
-            className="flex items-center space-x-2 text-slate-600 hover:text-slate-800 transition-colors"
+            to="/canvas"
+            className="flex items-center space-x-2 text-slate-900 hover:text-slate-700 transition-colors"
           >
+            <ArrowLeft className="w-5 h-5" />
             <FileText className="w-6 h-6 text-indigo-600" />
             <span className="text-xl font-semibold">
               ReSuMe<span className="text-indigo-600">Craft</span>
@@ -113,11 +119,15 @@ export default function Dashboard({ onCreate, onOpen }) {
           </Link>
 
           <div className="flex items-center space-x-4">
-            <button onClick={logoutHandler} className="text-slate-600">
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.5 }}
+              onClick={logoutHandler}
+              className="bg-black text-white hover:bg-gray-800 p-2 rounded-lg cursor-pointer">
               Log Out
-            </button>
-            <div className="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center">
-              <User className="w-4 h-4 text-indigo-600" />
+            </motion.button>
+            <div className="w-8 h-8 bg-black rounded-full shadow-3xl flex items-center justify-center">
+              <User className="w-4 h-4 text-white" />
             </div>
           </div>
         </div>
@@ -135,8 +145,9 @@ export default function Dashboard({ onCreate, onOpen }) {
             <div className="flex items-center justify-between">
               <div>
                 <h1 className="text-3xl font-bold text-slate-900 mb-2">
-                  {greetingWord}, {displayName}!
+                  {greetingWord}, {displayName} !
                 </h1>
+                <p className="text-slate-600">How's Your day?</p>
                 <p className="text-slate-600">
                   Manage your resumes and create new professional CVs
                 </p>
@@ -146,7 +157,7 @@ export default function Dashboard({ onCreate, onOpen }) {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={handleCreate}
-                className="flex items-center space-x-2 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors shadow-sm"
+                className="flex items-center space-x-2 px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors shadow-lg cursor-pointer"
               >
                 <Plus className="w-5 h-5" />
                 <span>Create New Resume</span>
@@ -185,35 +196,22 @@ export default function Dashboard({ onCreate, onOpen }) {
                       <div className="p-6">
                         <div className="flex items-start justify-between mb-4">
                           <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center group-hover:bg-indigo-200 transition-colors">
-                            <FileText className="w-6 h-6 text-indigo-600" />
+                            <FileText className="w-6 h-6 text-black" />
                           </div>
-                          <ArrowRight className="w-5 h-5 text-slate-400 group-hover:text-indigo-600 group-hover:translate-x-1 transition-all" />
+                          <ArrowRight className="w-5 h-5 text-slate-400 group-hover:text-black group-hover:translate-x-1 transition-all" />
                         </div>
 
                         <h3 className="font-semibold text-slate-900 mb-2 line-clamp-2">
                           {cv.name || "Untitled Resume"}
                         </h3>
-
-                        <div className="space-y-2 text-sm text-slate-600">
-                          <div className="flex items-center space-x-2">
-                            <Calendar className="w-4 h-4" />
-                            <span>Edited {formatDate(cv.updatedAt)}</span>
-                          </div>
-                          {cv.template && (
-                            <div className="flex items-center space-x-2">
-                              <FolderOpen className="w-4 h-4" />
-                              <span>{cv.template}</span>
-                            </div>
-                          )}
-                        </div>
                       </div>
 
                       <div className="px-6 py-3 bg-slate-50 border-t border-slate-200 group-hover:bg-indigo-50 transition-colors">
                         <div className="flex items-center justify-between text-sm">
-                          <span className="text-slate-600 group-hover:text-indigo-700 transition-colors">
+                          <span className="text-slate-600 group-hover:text-black transition-colors">
                             Click to open
                           </span>
-                          <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                          <div className="w-2 h-2 bg-green-600 rounded-full"></div>
                         </div>
                       </div>
                     </motion.div>
@@ -225,7 +223,7 @@ export default function Dashboard({ onCreate, onOpen }) {
                   animate={{ opacity: 1 }}
                   className="bg-white rounded-2xl border border-slate-200 p-12 text-center"
                 >
-                  <FileText className="w-16 h-16 text-slate-300 mx-auto mb-4" />
+                  <FileText className="w-16 h-16 text-slate-400 mx-auto mb-4" />
                   <h3 className="text-xl font-semibold text-slate-900 mb-2">
                     No Resumes Yet
                   </h3>
@@ -237,7 +235,7 @@ export default function Dashboard({ onCreate, onOpen }) {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={handleCreate}
-                    className="inline-flex items-center space-x-2 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+                    className="inline-flex items-center space-x-2 px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors cursor-pointer"
                   >
                     <Plus className="w-5 h-5" />
                     <span>Create Your First Resume</span>

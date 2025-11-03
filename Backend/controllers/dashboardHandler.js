@@ -11,7 +11,7 @@ const dashboardHandler = async (req, res) => {
         if (rows.length === 0) {
             return res.status(404).json({ message: "User not found" });
         }
-        console.log(rows[0].name);
+        // console.log(rows[0].name);
         return res.status(200).json(rows[0]);
     } catch (error) {
         return errorHandler(res, error);

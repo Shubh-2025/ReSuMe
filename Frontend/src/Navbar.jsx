@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import Button from "./DownloadButton";
 import { Link } from "react-router-dom";
+import { ArrowLeft, FileText} from "lucide-react";
+
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -14,18 +16,16 @@ const Navbar = () => {
 
   return (
     <nav className="flex h-25 items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">
-      {/* Logo */}
-      <div
-        className="text-3xl text-black font-bold cursor-pointer"
-        title="Home"
-        onClick={() => {
-          window.location = "/";
-        }}
-      >
-        <h2 className="text-2xl font-bold text-black">
-          ReSuMe<span className="text-indigo-500">Craft</span>
-        </h2>
-      </div>
+      <Link
+              to="/"
+              className="flex items-center space-x-2 text-slate-900 hover:text-slate-700 transition-colors"
+            >
+              <ArrowLeft className="w-5 h-5" />
+              <FileText className="w-6 h-6 text-indigo-600" />
+              <span className="text-xl font-semibold">
+                ReSuMe<span className="text-indigo-600">Craft</span>
+              </span>
+            </Link>
 
       {/* Desktop Menu */}
       {isLoggedIn ? (

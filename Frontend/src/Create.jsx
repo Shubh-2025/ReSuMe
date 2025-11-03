@@ -4,7 +4,7 @@ import CurvedLoop from "./Curvedloop";
 import template1 from "./template1.png";
 import template2 from "./template2.png";
 import template3 from "./template3.png";
-import { FileText, ArrowRight, LayoutTemplate, Eye } from "lucide-react";
+import { FileText, ArrowRight, ArrowUp, LayoutTemplate, Eye } from "lucide-react";
 
 const templates = [
   {
@@ -32,7 +32,7 @@ const templates = [
 
 const Create = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+    <div className="min-h-full w-full bg-gradient-to-br from-slate-50 to-slate-100">
       {/* Animated Progress Bar */}
       <motion.div
         initial={{ scaleX: 0 }}
@@ -49,9 +49,9 @@ const Create = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-12"
         >
-          <div className="flex items-center justify-center space-x-3 mb-6">
+          <div className="flex flex-col lg:flex-row items-center justify-center space-x-3 mb-6 select-none">
             <div className="p-3 bg-indigo-100 rounded-xl">
-              <LayoutTemplate className="w-8 h-8 text-indigo-600" />
+              <LayoutTemplate className="w-8 h-8 text-black" />
             </div>
             <div>
               <h1 className="text-4xl font-bold text-slate-900 mb-2">
@@ -109,17 +109,6 @@ const Create = () => {
                         {template.category}
                       </span>
                     </div>
-
-                    {/* Hover Overlay */}
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300 flex items-center justify-center">
-                      <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileHover={{ opacity: 1, scale: 1 }}
-                        className="bg-white rounded-full p-4 shadow-lg border border-slate-200"
-                      >
-                        <Eye className="w-6 h-6 text-indigo-600" />
-                      </motion.div>
-                    </div>
                   </div>
 
                   {/* Template Info */}
@@ -134,7 +123,7 @@ const Create = () => {
                     </div>
 
                     <div className="flex items-center justify-between pt-4 mt-4 border-t border-slate-100">
-                      <span className="text-indigo-600 text-sm font-medium">
+                      <span className="text-gray-800 text-sm font-medium">
                         Preview & Customize
                       </span>
                       <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-indigo-600 group-hover:translate-x-1 transition-all" />
@@ -153,26 +142,26 @@ const Create = () => {
           transition={{ delay: 0.4 }}
           className="text-center max-w-2xl mx-auto"
         >
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-slate-200">
-            <FileText className="w-12 h-12 text-indigo-600 mx-auto mb-4" />
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-slate-200 select-none">
+            <FileText className="w-12 h-12 text-slate-400 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-slate-900 mb-3">
               How It Works
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-slate-600 mb-6">
               <div className="flex items-center justify-center space-x-2">
-                <div className="w-6 h-6 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-xs font-semibold">
+                <div className="w-6 h-6 bg-indigo-100 text-gray-800 rounded-full flex items-center justify-center text-xs font-semibold">
                   1
                 </div>
                 <span>Choose Template</span>
               </div>
               <div className="flex items-center justify-center space-x-2">
-                <div className="w-6 h-6 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-xs font-semibold">
+                <div className="w-6 h-6 bg-indigo-100 text-gray-800 rounded-full flex items-center justify-center text-xs font-semibold">
                   2
                 </div>
                 <span>Customize Content</span>
               </div>
               <div className="flex items-center justify-center space-x-2">
-                <div className="w-6 h-6 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-xs font-semibold">
+                <div className="w-6 h-6 bg-indigo-100 text-gray-800 rounded-full flex items-center justify-center text-xs font-semibold">
                   3
                 </div>
                 <span>Download PDF</span>
@@ -193,16 +182,12 @@ const Create = () => {
         transition={{ delay: 0.5 }}
         className="border-t border-slate-200 py-6 mt-8"
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
-          <Link
-            to="/"
-            className="inline-flex items-center space-x-2 text-slate-700 hover:text-slate-900 transition-colors"
-          >
-            <FileText className="w-5 h-5 text-indigo-600" />
-            <span className="font-semibold">
-              ReSuMe<span className="text-indigo-600">Craft</span>
-            </span>
-          </Link>
+        <div className="w-full mx-auto px-4 sm:px-6 flex justify-center space-x-2 text-slate-700 hover:text-slate-900 transition-colors select-none cursor-pointer"
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+        >
+          <ArrowUp />
         </div>
       </motion.footer>
     </div>

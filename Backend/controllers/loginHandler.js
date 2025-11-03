@@ -13,7 +13,7 @@ const loginHandler = async (req, res) => {
         if (email === rows[0].email && password === rows[0].password) {
             res.status(200).send({ message: 'Login successful', id: rows[0].id });
         } else {
-            res.status(401).send({ message: 'Invalid credentials' });
+            res.status(400).send({ message: 'Invalid credentials' });
         }
     } catch (error) {
         console.error('Error during login:', error.message);

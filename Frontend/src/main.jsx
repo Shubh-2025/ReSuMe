@@ -21,7 +21,7 @@ const router = createBrowserRouter([
   },
   {
     path: "canvas",
-    element: <App />,
+    element: <App/>,
     children: [
       {
         path: "", 
