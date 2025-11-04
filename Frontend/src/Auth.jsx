@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Toaster, toast } from 'react-hot-toast';
+import { motion } from "framer-motion";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -24,17 +25,15 @@ const Auth = () => {
         <div className="flex justify-center mb-6">
           <button
             onClick={() => setIsLogin(true)}
-            className={`px-4 py-2 font-semibold rounded-tl-xl rounded-bl-xl transition-colors duration-300 ${
-              isLogin ? "bg-black text-white" : "bg-gray-100 text-gray-700"
-            }`}
+            className={`px-4 py-2 font-semibold rounded-tl-xl rounded-bl-xl transition-colors duration-300 ${isLogin ? "bg-black text-white" : "bg-gray-100 text-gray-700"
+              }`}
           >
             Login
           </button>
           <button
             onClick={() => setIsLogin(false)}
-            className={`px-4 py-2 font-semibold rounded-tr-xl rounded-br-xl transition-colors duration-300 ${
-              !isLogin ? "bg-black text-white" : "bg-gray-100 text-gray-700"
-            }`}
+            className={`px-4 py-2 font-semibold rounded-tr-xl rounded-br-xl transition-colors duration-300 ${!isLogin ? "bg-black text-white" : "bg-gray-100 text-gray-700"
+              }`}
           >
             Register
           </button>
@@ -60,15 +59,15 @@ const LoginForm = () => {
       });
       let result = await response.json();
       // console.log(result)
-      if(!response.ok){
+      if (!response.ok) {
         return toast.error(result.message);
       }
       localStorage.setItem("userId", result.id);
-      toast.success("Logged in Successfully",{ duration: 1000 })
+      toast.success("Logged in Successfully", { duration: 1000 })
       reset();
-      setTimeout(()=>
-      navigate("/canvas")
-      ,1500)
+      setTimeout(() =>
+        navigate("/canvas")
+        , 1500)
     } catch (error) {
       console.error("Error during login:", error.message);
     }
@@ -91,12 +90,14 @@ const LoginForm = () => {
         className=" w-full p-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all"
       />
       <div>
-        <button
-          type="submit"
-          className="bg-black text-white p-2 rounded-sm cursor-pointer"
+        <motion.button
+          type='submit'
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="flex items-center space-x-2 p-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors shadow-lg cursor-pointer"
         >
-          Login
-        </button>
+          <span>Login</span>
+        </motion.button>
       </div>
     </form>
   );
@@ -116,14 +117,14 @@ const RegisterForm = () => {
       let result = await response.json();
       localStorage.setItem("userId", result.id);
       // console.log(result);
-      if(!response.ok){
+      if (!response.ok) {
         return toast.error(result.message);
       }
-      toast.success("Registered Successfully",{ duration: 1000 })
+      toast.success("Registered Successfully", { duration: 1000 })
       reset();
-      setTimeout(()=>
-      navigate("/canvas")
-      ,1500)
+      setTimeout(() =>
+        navigate("/canvas")
+        , 1500)
     } catch (error) {
       console.error("Error during registration:", error.message);
     }
@@ -152,12 +153,14 @@ const RegisterForm = () => {
         className="w-full p-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all"
       />
       <div>
-        <button
-          type="submit"
-          className="bg-black text-white p-2 rounded-sm cursor-pointer"
+        <motion.button
+          type='submit'
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="flex items-center space-x-2 p-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors shadow-lg cursor-pointer"
         >
-          Register
-        </button>
+          <span>Register</span>
+        </motion.button>
       </div>
     </form>
   );
