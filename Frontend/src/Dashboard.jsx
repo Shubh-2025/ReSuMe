@@ -63,7 +63,7 @@ export default function Dashboard({ onCreate, onOpen }) {
       (async () => {
         try {
           const res = await fetch(
-            `http://localhost:9000/dashboard/${localStorage.getItem("userId")}`
+            `https://resume-wfu1.onrender.com/dashboard/${localStorage.getItem("userId")}`
           );
           if (!res.ok) {
             console.error("Failed to fetch user data", res.status);
@@ -81,7 +81,7 @@ export default function Dashboard({ onCreate, onOpen }) {
       (async () => {
         try {
           const res = await fetch(
-            `http://localhost:9000/userresumes/${localStorage.getItem("userId")}`
+            `https://resume-wfu1.onrender.com/userresumes/${localStorage.getItem("userId")}`
           );
           if (!res.ok) {
             console.error("Failed to fetch canvas data", res.status);

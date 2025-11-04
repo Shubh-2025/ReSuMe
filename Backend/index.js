@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 dotenv.config();
 const app = express();
 app.use(cors({
-    origin: ["http://localhost:5173"],
+    origin: ["http://localhost:5173","https://resume-iota-plum.vercel.app"],
     credentials: true
 }));
 const PORT = process.env.PORT || 4000;

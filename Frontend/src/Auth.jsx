@@ -52,7 +52,7 @@ const LoginForm = () => {
   async function handleLogin(data) {
     // console.log(data);
     try {
-      let response = await fetch("http://localhost:9000/login", {
+      let response = await fetch("https://resume-wfu1.onrender.com/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -109,7 +109,7 @@ const RegisterForm = () => {
   async function handleRegister(data) {
     // console.log(data);
     try {
-      let response = await fetch("http://localhost:9000/regsiter", {
+      let response = await fetch("https://resume-wfu1.onrender.com/regsiter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),

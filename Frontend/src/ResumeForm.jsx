@@ -10,7 +10,7 @@ export default function ResumeForm() {
     const id = localStorage.getItem('userId');
     useEffect(() => {
         if (!id) {
-            toast.error("Please login to make your own resume",{duration:5000});
+            toast.error("Please login to make your own resume", { duration: 5000 });
             navigate("/auth");
         }
     }, []); // prevents user from editin the document without logging in.
@@ -166,7 +166,7 @@ export default function ResumeForm() {
 
         setIsSubmitting(true);
         try {
-            const response = await fetch("http://localhost:9000/format", {
+            const response = await fetch("https://resume-wfu1.onrender.com/format", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
