@@ -1,6 +1,6 @@
-import Template1 from "./Template1";
-import Template2 from "./Template2";
-import Template3 from "./Template3";
+import Template1 from "./Template1.jsx";
+import Template2 from "./Template2.jsx";
+import Template3 from "./Template3.jsx";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import CurvedLoop from "./Curvedloop";
+import CurvedLoop from "./Curvedloop.jsx";
 import template1 from "./template1.png";
 import template2 from "./template2.png";
 import template3 from "./template3.png";

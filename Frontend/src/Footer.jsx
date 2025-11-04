@@ -1,5 +1,3 @@
-import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
-
 const Footer = () => {
   return (
     <footer className="w-full bg-gradient-to-r from-black via-gray-800 to-black text-gray-300">

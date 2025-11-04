@@ -3,9 +3,9 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import Template1 from "./Template1";
-import Template2 from "./Template2";
-import Template3 from "./Template3";
+import Template1 from "./Template1.jsx";
+import Template2 from "./Template2.jsx";
+import Template3 from "./Template3.jsx";
 import {
   Download,
   Edit3,

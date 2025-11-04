@@ -2,10 +2,18 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { FileText, Plus, Trash2, ArrowLeft, Send, Calendar, Building, BookOpen, CheckCircle } from "lucide-react";
+import { Toaster, toast } from 'react-hot-toast';
 
 export default function ResumeForm() {
     const { tid, uid } = useParams();
     const navigate = useNavigate();
+    const id = localStorage.getItem('userId');
+    useEffect(() => {
+        if (!id) {
+            toast.error("Please login to make your own resume",{duration:5000});
+            navigate("/auth");
+        }
+    }, []); // prevents user from editin the document without logging in.
 
     const [formData, setFormData] = useState({
         tid: tid,
@@ -103,7 +111,7 @@ export default function ResumeForm() {
                 : type === "experience"
                     ? { role: "", period: "", details: "" }
                     : { degree: "", institution: "", details: "" };
-        
+
         setFormData((prev) => ({
             ...prev,
             [type]: [...prev[type], emptyItem],
@@ -207,6 +215,7 @@ export default function ResumeForm() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-8">
             {/* Header */}
+            <Toaster />
             <div className="max-w-4xl mx-auto px-4 sm:px-6 mb-8">
                 <div className="flex items-center justify-between">
                     <button
@@ -216,7 +225,7 @@ export default function ResumeForm() {
                         <ArrowLeft className="w-5 h-5" />
                         <span>Back</span>
                     </button>
-                    
+
                     <div className="text-center">
                         <h1 className="text-3xl font-bold text-slate-900">
                             Create Your Resume
@@ -263,27 +272,24 @@ export default function ResumeForm() {
                             <button
                                 key={section.id}
                                 onClick={() => setActiveSection(section.id)}
-                                className={`flex flex-col items-center transition-all ${
-                                    isCurrent 
-                                        ? "text-indigo-600 font-semibold scale-110" 
-                                        : isCompleted
-                                            ? "text-green-600"
-                                            : "text-slate-400 hover:text-slate-600"
-                                }`}
+                                className={`flex flex-col items-center transition-all ${isCurrent
+                                    ? "text-indigo-600 font-semibold scale-110"
+                                    : isCompleted
+                                        ? "text-green-600"
+                                        : "text-slate-400 hover:text-slate-600"
+                                    }`}
                             >
-                                <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${
-                                    isCompleted
-                                        ? "bg-green-100 border-2 border-green-500"
-                                        : isCurrent
-                                            ? "bg-indigo-100 border-2 border-indigo-500"
-                                            : "bg-slate-100 border-2 border-slate-300"
-                                }`}>
+                                <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 ${isCompleted
+                                    ? "bg-green-100 border-2 border-green-500"
+                                    : isCurrent
+                                        ? "bg-indigo-100 border-2 border-indigo-500"
+                                        : "bg-slate-100 border-2 border-slate-300"
+                                    }`}>
                                     {isCompleted ? (
                                         <CheckCircle className="w-4 h-4 text-green-600" />
                                     ) : (
-                                        <span className={`text-xs font-semibold ${
-                                            isCurrent ? "text-indigo-600" : "text-slate-400"
-                                        }`}>
+                                        <span className={`text-xs font-semibold ${isCurrent ? "text-indigo-600" : "text-slate-400"
+                                            }`}>
                                             {index + 1}
                                         </span>
                                     )}
@@ -315,7 +321,7 @@ export default function ResumeForm() {
                                     className="space-y-6"
                                 >
                                     <h2 className="text-2xl font-semibold text-slate-900 mb-6">Personal Information</h2>
-                                    
+
                                     <div className="grid md:grid-cols-2 gap-6">
                                         <div>
                                             <label className="block text-sm font-medium text-slate-700 mb-2">
@@ -326,9 +332,8 @@ export default function ResumeForm() {
                                                 placeholder="Enter your full name"
                                                 value={formData.name}
                                                 onChange={(e) => handleChange(e, "name")}
-                                                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors ${
-                                                    errors.name ? "border-red-500" : "border-slate-300"
-                                                }`}
+                                                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors ${errors.name ? "border-red-500" : "border-slate-300"
+                                                    }`}
                                             />
                                             {errors.name && <p className="text-red-500 text-sm mt-2">{errors.name}</p>}
                                         </div>
@@ -342,9 +347,8 @@ export default function ResumeForm() {
                                                 placeholder="e.g. Frontend Developer"
                                                 value={formData.title}
                                                 onChange={(e) => handleChange(e, "title")}
-                                                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors ${
-                                                    errors.title ? "border-red-500" : "border-slate-300"
-                                                }`}
+                                                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors ${errors.title ? "border-red-500" : "border-slate-300"
+                                                    }`}
                                             />
                                             {errors.title && <p className="text-red-500 text-sm mt-2">{errors.title}</p>}
                                         </div>
@@ -373,7 +377,7 @@ export default function ResumeForm() {
                                     className="space-y-6"
                                 >
                                     <h2 className="text-2xl font-semibold text-slate-900 mb-6">Contact Information</h2>
-                                    
+
                                     <div className="grid md:grid-cols-2 gap-6">
                                         <div>
                                             <label className="block text-sm font-medium text-slate-700 mb-2">
@@ -384,9 +388,8 @@ export default function ResumeForm() {
                                                 placeholder="your.email@example.com"
                                                 value={formData.contact.email}
                                                 onChange={(e) => handleChange(e, "contact.email")}
-                                                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors ${
-                                                    errors.email ? "border-red-500" : "border-slate-300"
-                                                }`}
+                                                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors ${errors.email ? "border-red-500" : "border-slate-300"
+                                                    }`}
                                             />
                                             {errors.email && <p className="text-red-500 text-sm mt-2">{errors.email}</p>}
                                         </div>
@@ -400,9 +403,8 @@ export default function ResumeForm() {
                                                 placeholder="+1 (555) 123-4567"
                                                 value={formData.contact.phone}
                                                 onChange={(e) => handleChange(e, "contact.phone")}
-                                                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors ${
-                                                    errors.phone ? "border-red-500" : "border-slate-300"
-                                                }`}
+                                                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors ${errors.phone ? "border-red-500" : "border-slate-300"
+                                                    }`}
                                             />
                                             {errors.phone && <p className="text-red-500 text-sm mt-2">{errors.phone}</p>}
                                         </div>
@@ -451,7 +453,7 @@ export default function ResumeForm() {
                                     className="space-y-6"
                                 >
                                     <h2 className="text-2xl font-semibold text-slate-900 mb-6">Professional Summary</h2>
-                                    
+
                                     <div>
                                         <label className="block text-sm font-medium text-slate-700 mb-2">
                                             Write a brief overview of your professional background *
@@ -461,9 +463,8 @@ export default function ResumeForm() {
                                             placeholder="Describe your professional experience, key achievements, and career objectives..."
                                             value={formData.profile}
                                             onChange={(e) => handleChange(e, "profile")}
-                                            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors resize-none ${
-                                                errors.profile ? "border-red-500" : "border-slate-300"
-                                            }`}
+                                            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors resize-none ${errors.profile ? "border-red-500" : "border-slate-300"
+                                                }`}
                                         />
                                         {errors.profile && <p className="text-red-500 text-sm mt-2">{errors.profile}</p>}
                                         <p className="text-sm text-slate-500 mt-2">
@@ -501,7 +502,7 @@ export default function ResumeForm() {
                                     className="space-y-6"
                                 >
                                     <h2 className="text-2xl font-semibold text-slate-900 mb-6">Skills & Expertise</h2>
-                                    
+
                                     <div className="space-y-4">
                                         {formData.skills.map((skill, i) => (
                                             <div key={i} className="flex items-center space-x-3">
@@ -524,7 +525,7 @@ export default function ResumeForm() {
                                             </div>
                                         ))}
                                         {errors.skills && <p className="text-red-500 text-sm">{errors.skills}</p>}
-                                        
+
                                         <button
                                             type="button"
                                             onClick={() => addArrayField("skills")}
@@ -565,7 +566,7 @@ export default function ResumeForm() {
                                     className="space-y-6"
                                 >
                                     <h2 className="text-2xl font-semibold text-slate-900 mb-6">Work Experience</h2>
-                                    
+
                                     <div className="space-y-6">
                                         {formData.experience.map((exp, i) => (
                                             <div key={i} className="border border-slate-200 rounded-xl p-6 bg-slate-50/50">
@@ -582,7 +583,7 @@ export default function ResumeForm() {
                                                         </button>
                                                     )}
                                                 </div>
-                                                
+
                                                 <div className="grid md:grid-cols-2 gap-4 mb-4">
                                                     <div>
                                                         <label className="block text-sm font-medium text-slate-700 mb-2">
@@ -611,7 +612,7 @@ export default function ResumeForm() {
                                                         />
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div>
                                                     <label className="block text-sm font-medium text-slate-700 mb-2">
                                                         Responsibilities & Achievements
@@ -626,7 +627,7 @@ export default function ResumeForm() {
                                                 </div>
                                             </div>
                                         ))}
-                                        
+
                                         <button
                                             type="button"
                                             onClick={() => addArrayField("experience")}
@@ -667,7 +668,7 @@ export default function ResumeForm() {
                                     className="space-y-6"
                                 >
                                     <h2 className="text-2xl font-semibold text-slate-900 mb-6">Education</h2>
-                                    
+
                                     <div className="space-y-6">
                                         {formData.education.map((edu, i) => (
                                             <div key={i} className="border border-slate-200 rounded-xl p-6 bg-slate-50/50">
@@ -684,7 +685,7 @@ export default function ResumeForm() {
                                                         </button>
                                                     )}
                                                 </div>
-                                                
+
                                                 <div className="grid md:grid-cols-2 gap-4 mb-4">
                                                     <div>
                                                         <label className="block text-sm font-medium text-slate-700 mb-2">
@@ -713,7 +714,7 @@ export default function ResumeForm() {
                                                         />
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div>
                                                     <label className="block text-sm font-medium text-slate-700 mb-2">
                                                         Additional Details
@@ -728,7 +729,7 @@ export default function ResumeForm() {
                                                 </div>
                                             </div>
                                         ))}
-                                        
+
                                         <button
                                             type="button"
                                             onClick={() => addArrayField("education")}
@@ -781,7 +782,7 @@ export default function ResumeForm() {
                                     {/* Review Summary */}
                                     <div className="bg-slate-50 rounded-xl p-6 space-y-4">
                                         <h3 className="font-semibold text-slate-900 mb-4">Summary Preview</h3>
-                                        
+
                                         <div className="grid md:grid-cols-2 gap-4 text-sm">
                                             <div>
                                                 <span className="font-medium text-slate-700">Name:</span>
@@ -824,15 +825,14 @@ export default function ResumeForm() {
                                         >
                                             ← Back to Education
                                         </button>
-                                        
+
                                         <button
                                             type="submit"
                                             disabled={isSubmitting}
-                                            className={`inline-flex items-center space-x-2 px-8 py-4 rounded-lg font-semibold transition-all ${
-                                                isSubmitting 
-                                                    ? "bg-slate-400 cursor-not-allowed" 
-                                                    : "bg-indigo-600 hover:bg-indigo-700 shadow-lg hover:shadow-xl"
-                                            } text-white`}
+                                            className={`inline-flex items-center space-x-2 px-8 py-4 rounded-lg font-semibold transition-all ${isSubmitting
+                                                ? "bg-slate-400 cursor-not-allowed"
+                                                : "bg-indigo-600 hover:bg-indigo-700 shadow-lg hover:shadow-xl"
+                                                } text-white`}
                                         >
                                             <Send className="w-5 h-5" />
                                             <span>{isSubmitting ? "Generating..." : "Generate Resume"}</span>

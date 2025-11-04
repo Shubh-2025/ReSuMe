@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import './index.css';
 
-import Landing from './landing.jsx';
+import Landing from './Landing.jsx';
 import App from './App.jsx';
 import Navbar from './Navbar';
 import Create from './Create';
@@ -11,7 +11,7 @@ import Footer from './Footer.jsx';
 import Preview from './Preview';
 import Auth from './Auth.jsx';
 import ResumeForm from './ResumeForm.jsx';
-import Generated from './generated.jsx';
+import Generated from './Generated.jsx';
 import Dashboard from './Dashboard.jsx';
 
 const router = createBrowserRouter([

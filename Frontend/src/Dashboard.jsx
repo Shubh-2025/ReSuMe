@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -8,6 +8,7 @@ import {
   User,
   ArrowRight,
 } from "lucide-react";
+import { Toaster, toast } from "react-hot-toast"
 
 export default function Dashboard({ onCreate, onOpen }) {
   const [name, setName] = useState("User");
@@ -55,9 +56,8 @@ export default function Dashboard({ onCreate, onOpen }) {
   };
   useEffect(() => {
     if (!localStorage.getItem("userId")) {
+      toast.error("Please login to enter your dashboard", { duration: 5000 });
       navigate('/auth');
-      // console.log('one');
-      alert('Login first to access your dashboard');
       //alerts twice as react uses strictMode In development.
     } else {
       (async () => {
@@ -104,6 +104,7 @@ export default function Dashboard({ onCreate, onOpen }) {
   }
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-8">
+      <Toaster />
       {/* Header */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 mb-8">
         <div className="flex items-center justify-between">
@@ -142,7 +143,7 @@ export default function Dashboard({ onCreate, onOpen }) {
         >
           {/* Welcome Section */}
           <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-8">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col lg:flex-row gap-6 items-center justify-between w-full">
               <div>
                 <h1 className="text-3xl font-bold text-slate-900 mb-2">
                   {greetingWord}, {displayName} !
@@ -152,12 +153,11 @@ export default function Dashboard({ onCreate, onOpen }) {
                   Manage your resumes and create new professional CVs
                 </p>
               </div>
-
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={handleCreate}
-                className="flex items-center space-x-2 px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors shadow-lg cursor-pointer"
+                className="flex items-center space-x-2 p-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors shadow-lg cursor-pointer"
               >
                 <Plus className="w-5 h-5" />
                 <span>Create New Resume</span>
