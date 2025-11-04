@@ -545,7 +545,7 @@ const Generated = () => {
       setResumeData({ ...formData });
 
       // Save to backend
-      const response = await fetch("http://localhost:9000/edit", {
+      const response = await fetch("https://resume-wfu1.onrender.com:9000/edit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -584,7 +584,7 @@ const Generated = () => {
     const fetchTemplate = async () => {
       try {
         const response = await fetch(
-          `http://localhost:9000/generate/${localStorage.getItem(
+          `https://resume-wfu1.onrender.com/generate/${localStorage.getItem(
             "userId"
           )}/${id}`
         );
