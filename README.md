@@ -74,7 +74,7 @@ shubh-2025-resume/
 |------------|----------------|
 | Frontend   | React, Vite, TailwindCSS / Custom CSS |
 | Backend    | Node.js, Express.js |
-| Database   | MongoDB (Mongoose) |
+| Database   | PostgreSQL (Supabase) |
 | Auth       | JWT (JSON Web Tokens) |
 | Utilities  | HTML2Canvas, jsPDF |
 
