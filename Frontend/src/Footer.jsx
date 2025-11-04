@@ -35,17 +35,6 @@ const Footer = () => {
             <li><a href="#" className="hover:text-indigo-400 transition">Terms of Service</a></li>
           </ul>
         </div>
-
-        {/* Social Media */}
-        <div>
-          <h3 className="text-lg font-semibold text-white mb-4">Follow Us</h3>
-          <div className="flex space-x-4">
-            <a href="#" className="hover:text-indigo-400 transition"><Facebook size={20} /></a>
-            <a href="#" className="hover:text-indigo-400 transition"><Twitter size={20} /></a>
-            <a href="#" className="hover:text-indigo-400 transition"><Instagram size={20} /></a>
-            <a href="#" className="hover:text-indigo-400 transition"><Linkedin size={20} /></a>
-          </div>
-        </div>
       </div>
 
       {/* Bottom Bar */}
