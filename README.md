@@ -110,8 +110,8 @@ npm install
 npm run dev
 ```
 
-Frontend → http://localhost:5173  
-Backend → http://localhost:9000
+Frontend → [https://resume-iota-plum.vercel.app]  
+Backend → [https://resume-wfu1.onrender.com]
 
 ## 🤝 Contributing
 
