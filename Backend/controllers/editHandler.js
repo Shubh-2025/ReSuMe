@@ -11,7 +11,7 @@ const editHandler = async (req, res) => {
             profile,
             experience,
             education,
-            tid,
+            templateId,
             uid
         } = req.body;
         console.log(req.body);
@@ -19,12 +19,12 @@ const editHandler = async (req, res) => {
         // console.log(experience);
         education = education.map((edu) => JSON.stringify(edu));
         // console.log(education);
-        if (!uid) {
-            return res.status(400).json({ message: "User ID is required." });
+        if (!uid||!templateId) {
+            return res.status(400).json({ message: "userID and templateID is required." });
         }
 
         await pool.query(
-            "update resumes set name=$1, title=$2,phone=$3, email=$4,address=$5, skills=$6, profile=$7, experience=$8, education=$9 where uid=$10 and tid=$11", [name, title, contact.phone, contact.email, contact.address, skills, profile, experience, education, uid, tid]);
+            "update resumes set name=$1, title=$2,phone=$3, email=$4,address=$5, skills=$6, profile=$7, experience=$8, education=$9 where uid=$10 and tid=$11", [name, title, contact.phone, contact.email, contact.address, skills, profile, experience, education, uid, templateId]);
         return res.status(200).json({
             message: "Resume updated successfully!",
         });
