@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Button from "./DownloadButton";
+import Button from "./DownloadButton.jsx";
 import { Link } from "react-router-dom";
 import { ArrowLeft, FileText} from "lucide-react";
 
