@@ -553,6 +553,7 @@ const Generated = () => {
         body: JSON.stringify({
           templateId,
           uid: localStorage.getItem("userId"),
+          id,
           ...formData,
         }),
       });
